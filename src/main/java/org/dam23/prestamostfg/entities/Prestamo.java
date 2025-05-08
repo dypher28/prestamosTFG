@@ -1,8 +1,8 @@
 package org.dam23.prestamostfg.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 
-import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -10,8 +10,8 @@ import java.util.Set;
 @Table(name = "prestamos")
 public class Prestamo {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prestamos_id_gen")
-    @SequenceGenerator(name = "prestamos_id_gen", sequenceName = "prestamos_id_prestamo_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ColumnDefault("nextval('prestamos_id_prestamo_seq')")
     @Column(name = "id_prestamo", nullable = false)
     private Integer id;
 
@@ -19,17 +19,11 @@ public class Prestamo {
     @JoinColumn(name = "matricula_id")
     private Matricula matricula;
 
-    @Column(name = "fecha_prestamo")
-    private LocalDate fechaPrestamo;
-
-    @Column(name = "fecha_devolucion")
-    private LocalDate fechaDevolucion;
-
     @Column(name = "devuelto")
     private Boolean devuelto;
 
-    @OneToMany(mappedBy = "idPrestamo")
-    private Set<PrestamosLibro> prestamosLibros = new LinkedHashSet<>();
+    @ManyToMany(mappedBy = "prestamos")
+    private Set<Libro> libros = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -47,22 +41,6 @@ public class Prestamo {
         this.matricula = matricula;
     }
 
-    public LocalDate getFechaPrestamo() {
-        return fechaPrestamo;
-    }
-
-    public void setFechaPrestamo(LocalDate fechaPrestamo) {
-        this.fechaPrestamo = fechaPrestamo;
-    }
-
-    public LocalDate getFechaDevolucion() {
-        return fechaDevolucion;
-    }
-
-    public void setFechaDevolucion(LocalDate fechaDevolucion) {
-        this.fechaDevolucion = fechaDevolucion;
-    }
-
     public Boolean getDevuelto() {
         return devuelto;
     }
@@ -71,11 +49,12 @@ public class Prestamo {
         this.devuelto = devuelto;
     }
 
-    public Set<PrestamosLibro> getPrestamosLibros() {
-        return prestamosLibros;
+    public Set<Libro> getLibros() {
+        return libros;
     }
 
-    public void setPrestamosLibros(Set<PrestamosLibro> prestamosLibros) {
-        this.prestamosLibros = prestamosLibros;
+    public void setLibros(Set<Libro> libros) {
+        this.libros = libros;
     }
+
 }

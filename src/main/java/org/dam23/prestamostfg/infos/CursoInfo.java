@@ -12,6 +12,8 @@ public interface CursoInfo {
 
     Set<AsignaturaInfo> getAsignaturas();
 
+    Set<MatriculaInfo> getMatriculas();
+
     /**
      * Projection for {@link org.dam23.prestamostfg.entities.Asignatura}
      */
@@ -19,5 +21,38 @@ public interface CursoInfo {
         Integer getId();
 
         String getNombre();
+
+        Set<LibroInfo> getLibros();
+
+        /**
+         * Projection for {@link org.dam23.prestamostfg.entities.Libro}
+         */
+        interface LibroInfo {
+            Integer getId();
+
+            String getTitulo();
+        }
+    }
+
+    /**
+     * Projection for {@link org.dam23.prestamostfg.entities.Matricula}
+     */
+    interface MatriculaInfo {
+        Integer getId();
+
+        String getGrupo();
+
+        String getAnioEscolar();
+
+        AlumnoInfo getAlumno();
+
+        /**
+         * Projection for {@link org.dam23.prestamostfg.entities.Alumno}
+         */
+        interface AlumnoInfo {
+            Integer getId();
+
+            String getNombre();
+        }
     }
 }

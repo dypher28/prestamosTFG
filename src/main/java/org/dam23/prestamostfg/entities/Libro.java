@@ -25,14 +25,21 @@ public class Libro {
     private String isbn;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "curso_id")
-    private Curso curso;
+    @JoinColumn(name = "asignatura_id")
+    private Asignatura asignatura;
 
-    @Column(name = "url_image", length = Integer.MAX_VALUE)
-    private String urlImage;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image")
+    private Image image;
 
-    @OneToMany(mappedBy = "idLibro")
-    private Set<PrestamosLibro> prestamosLibro = new LinkedHashSet<>();
+    @Column(name = "cantidad")
+    private Integer cantidad;
+
+    @ManyToMany
+    @JoinTable(name = "prestamos_libros",
+            joinColumns = @JoinColumn(name = "id_libro"),
+            inverseJoinColumns = @JoinColumn(name = "id_prestamo"))
+    private Set<Prestamo> prestamos = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -66,27 +73,36 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    public Curso getCurso() {
-        return curso;
+    public Asignatura getAsignatura() {
+        return asignatura;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
     }
 
-    public String getUrlImage() {
-        return urlImage;
+    public Image getImage() {
+        return image;
     }
 
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
-    public Set<PrestamosLibro> getPrestamosLibro() {
-        return prestamosLibro;
+    public Integer getCantidad() {
+        return cantidad;
     }
 
-    public void setPrestamosLibro(Set<PrestamosLibro> prestamosLibro) {
-        this.prestamosLibro = prestamosLibro;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
+
+    public Set<Prestamo> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(Set<Prestamo> prestamos) {
+        this.prestamos = prestamos;
+    }
+
 }

@@ -5,8 +5,10 @@ import org.dam23.prestamostfg.infos.CursoInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CursoRepository extends JpaRepository<Curso, Integer> {
 
-    List<CursoInfo> findAllBy();
+    List<CursoInfo> findAllByOrderById();
+    CursoInfo findCursoById(Integer idCurso);
 }

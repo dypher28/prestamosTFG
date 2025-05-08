@@ -3,6 +3,9 @@ package org.dam23.prestamostfg.entities;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "asignaturas")
 public class Asignatura {
@@ -18,6 +21,9 @@ public class Asignatura {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id")
     private Curso curso;
+
+    @OneToMany(mappedBy = "asignatura")
+    private Set<Libro> libros = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -41,6 +47,14 @@ public class Asignatura {
 
     public void setCurso(Curso curso) {
         this.curso = curso;
+    }
+
+    public Set<Libro> getLibros() {
+        return libros;
+    }
+
+    public void setLibros(Set<Libro> libros) {
+        this.libros = libros;
     }
 
 }

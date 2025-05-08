@@ -22,9 +22,6 @@ public class Curso {
     private Set<Asignatura> asignaturas = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "curso")
-    private Set<Libro> libros = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "curso")
     private Set<Matricula> matriculas = new LinkedHashSet<>();
 
     public Integer getId() {
@@ -49,14 +46,6 @@ public class Curso {
 
     public void setAsignaturas(Set<Asignatura> asignaturas) {
         this.asignaturas = asignaturas;
-    }
-
-    public Set<Libro> getLibros() {
-        return libros;
-    }
-
-    public void setLibros(Set<Libro> libros) {
-        this.libros = libros;
     }
 
     public Set<Matricula> getMatriculas() {

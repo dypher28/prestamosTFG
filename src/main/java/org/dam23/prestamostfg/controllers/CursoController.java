@@ -5,6 +5,7 @@ import org.dam23.prestamostfg.services.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,5 +19,10 @@ public class CursoController {
     @GetMapping("obtenerCursos")
     public ResponseEntity<ResponseModel> obtenerCursos(){
         return ResponseEntity.ok(cursoService.obtenerCursos());
+    }
+
+    @GetMapping("asignaturasCurso/{idCurso}")
+    public ResponseEntity<ResponseModel> asignaturasCurso(@PathVariable int idCurso){
+        return ResponseEntity.ok(cursoService.obtenerAsignaturasPorCurso(idCurso));
     }
 }

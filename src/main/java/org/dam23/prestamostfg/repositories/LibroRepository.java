@@ -16,7 +16,6 @@ public interface LibroRepository extends JpaRepository<Libro, Integer> {
     @Query("select l from Libro l where upper(l.isbn) = upper(?1)")
     LibroInfo findByIsbn(String isbn);
 
-
     @Override
     void deleteById(Integer integer);
 }

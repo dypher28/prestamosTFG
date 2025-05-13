@@ -24,6 +24,9 @@ public class Curso {
     @OneToMany(mappedBy = "curso")
     private Set<Matricula> matriculas = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "curso")
+    private Set<Paquete> paquetes = new LinkedHashSet<>();
+
     public Integer getId() {
         return id;
     }
@@ -54,6 +57,14 @@ public class Curso {
 
     public void setMatriculas(Set<Matricula> matriculas) {
         this.matriculas = matriculas;
+    }
+
+    public Set<Paquete> getPaquetes() {
+        return paquetes;
+    }
+
+    public void setPaquetes(Set<Paquete> paquetes) {
+        this.paquetes = paquetes;
     }
 
 }

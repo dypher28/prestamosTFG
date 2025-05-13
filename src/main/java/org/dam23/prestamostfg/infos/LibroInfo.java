@@ -1,5 +1,7 @@
 package org.dam23.prestamostfg.infos;
 
+import java.util.Set;
+
 /**
  * Projection for {@link org.dam23.prestamostfg.entities.Libro}
  */
@@ -17,6 +19,8 @@ public interface LibroInfo {
     AsignaturaInfo1 getAsignatura();
 
     ImageInfo getImage();
+
+    Set<PaqueteInfo> getPaquetes();
 
     /**
      * Projection for {@link org.dam23.prestamostfg.entities.Asignatura}
@@ -49,5 +53,14 @@ public interface LibroInfo {
         String getContentType();
 
         byte[] getData();
+    }
+
+    /**
+     * Projection for {@link org.dam23.prestamostfg.entities.Paquete}
+     */
+    interface PaqueteInfo {
+        Integer getId();
+
+        String getNombre();
     }
 }

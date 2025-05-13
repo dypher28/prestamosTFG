@@ -36,10 +36,10 @@ public class Libro {
     private Integer cantidad;
 
     @ManyToMany
-    @JoinTable(name = "prestamos_libros",
+    @JoinTable(name = "paquetes_libros",
             joinColumns = @JoinColumn(name = "id_libro"),
-            inverseJoinColumns = @JoinColumn(name = "id_prestamo"))
-    private Set<Prestamo> prestamos = new LinkedHashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "id_paquete"))
+    private Set<Paquete> paquetes = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -97,12 +97,12 @@ public class Libro {
         this.cantidad = cantidad;
     }
 
-    public Set<Prestamo> getPrestamos() {
-        return prestamos;
+    public Set<Paquete> getPaquetes() {
+        return paquetes;
     }
 
-    public void setPrestamos(Set<Prestamo> prestamos) {
-        this.prestamos = prestamos;
+    public void setPaquetes(Set<Paquete> paquetes) {
+        this.paquetes = paquetes;
     }
 
 }

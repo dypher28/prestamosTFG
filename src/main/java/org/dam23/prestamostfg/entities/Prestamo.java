@@ -3,8 +3,7 @@ package org.dam23.prestamostfg.entities;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "prestamos")
@@ -19,11 +18,18 @@ public class Prestamo {
     @JoinColumn(name = "matricula_id")
     private Matricula matricula;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "paquete_id")
+    private Paquete paquete;
+
+    @Column(name = "fecha_prestamo")
+    private LocalDate fechaPrestamo;
+
+    @Column(name = "fecha_devolucion")
+    private LocalDate fechaDevolucion;
+
     @Column(name = "devuelto")
     private Boolean devuelto;
-
-    @ManyToMany(mappedBy = "prestamos")
-    private Set<Libro> libros = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -41,20 +47,36 @@ public class Prestamo {
         this.matricula = matricula;
     }
 
+    public Paquete getPaquete() {
+        return paquete;
+    }
+
+    public void setPaquete(Paquete paquete) {
+        this.paquete = paquete;
+    }
+
+    public LocalDate getFechaPrestamo() {
+        return fechaPrestamo;
+    }
+
+    public void setFechaPrestamo(LocalDate fechaPrestamo) {
+        this.fechaPrestamo = fechaPrestamo;
+    }
+
+    public LocalDate getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
+    }
+
     public Boolean getDevuelto() {
         return devuelto;
     }
 
     public void setDevuelto(Boolean devuelto) {
         this.devuelto = devuelto;
-    }
-
-    public Set<Libro> getLibros() {
-        return libros;
-    }
-
-    public void setLibros(Set<Libro> libros) {
-        this.libros = libros;
     }
 
 }

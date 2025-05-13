@@ -6,7 +6,10 @@ import org.dam23.prestamostfg.repositories.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CursoService {
@@ -22,18 +25,25 @@ public class CursoService {
         return new ResponseModel(1, "No se encontraron cursos", null);
     }
 
+    // Metodo para obtener las asignaturas por orden alfabetico segun el curso seleccionado
     public ResponseModel obtenerAsignaturasPorCurso(Integer idCurso) {
         CursoInfo curso = cursoRepository.findCursoById(idCurso);
 
-        if(curso == null) {
+        if (curso == null) {
             return new ResponseModel(1, "Curso no encontrado", null);
         }
 
-        if(curso.getAsignaturas() == null || curso.getAsignaturas().isEmpty()) {
+        Set<CursoInfo.AsignaturaInfo> asignaturasSet = curso.getAsignaturas();
+
+        if (asignaturasSet == null || asignaturasSet.isEmpty()) {
             return new ResponseModel(1, "No se encontraron asignaturas en este curso", null);
         }
 
-        return new ResponseModel(0, "Asignaturas", curso.getAsignaturas());
+        // Convertir a lista y ordenar alfabéticamente por nombre
+        List<CursoInfo.AsignaturaInfo> asignaturasOrdenadas = new ArrayList<>(asignaturasSet);
+        asignaturasOrdenadas.sort(Comparator.comparing(CursoInfo.AsignaturaInfo::getNombre));
+
+        return new ResponseModel(0, "Asignaturas ordenadas", asignaturasOrdenadas);
     }
 
 

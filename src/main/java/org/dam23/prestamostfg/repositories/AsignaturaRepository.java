@@ -9,10 +9,6 @@ import java.util.List;
 
 public interface AsignaturaRepository extends JpaRepository<Asignatura, Integer> {
 
-    List<AsignaturaInfo> findAllBy();
-
-    @Query("select a from Asignatura a where a.curso.id = ?1")
-    List<Asignatura> findByCurso(Integer id);
-
-
+    List<AsignaturaInfo> findAllByOrderById();
+    AsignaturaInfo findAsignaturaById(Integer idAsignatura);
 }

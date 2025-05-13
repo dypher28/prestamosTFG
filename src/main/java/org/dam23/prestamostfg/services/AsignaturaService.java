@@ -15,4 +15,19 @@ public class AsignaturaService {
     @Autowired
     private AsignaturaRepository asignaturaRepository;
 
+    public ResponseModel obtenerLibrosPorAsignatura(Integer idAsignatura) {
+        AsignaturaInfo asignatura = asignaturaRepository.findAsignaturaById(idAsignatura);
+
+        if(asignatura == null) {
+            return new ResponseModel(1, "Asignatura no encontrada", null);
+        }
+
+        if(asignatura.getLibros() == null || asignatura.getLibros().isEmpty()) {
+            return new ResponseModel(1, "No se encontraron libros en esta asignatura", null);
+        }
+
+        return new ResponseModel(0, "Libros", asignatura.getLibros());
+    }
+
+
 }

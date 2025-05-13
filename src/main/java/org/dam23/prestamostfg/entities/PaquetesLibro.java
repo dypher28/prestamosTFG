@@ -3,24 +3,24 @@ package org.dam23.prestamostfg.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "prestamos_libros")
-public class PrestamosLibro {
+@Table(name = "paquetes_libros")
+public class PaquetesLibro {
     @Id
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_prestamo", nullable = false)
-    private Prestamo idPrestamo;
+    @JoinColumn(name = "id_paquete", nullable = false)
+    private Paquete idPaquete;
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_libro", nullable = false)
     private Libro idLibro;
 
-    public Prestamo getIdPrestamo() {
-        return idPrestamo;
+    public Paquete getIdPaquete() {
+        return idPaquete;
     }
 
-    public void setIdPrestamo(Prestamo idPrestamo) {
-        this.idPrestamo = idPrestamo;
+    public void setIdPaquete(Paquete idPaquete) {
+        this.idPaquete = idPaquete;
     }
 
     public Libro getIdLibro() {

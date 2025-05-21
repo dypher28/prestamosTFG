@@ -29,7 +29,7 @@ public class Libro {
     private Asignatura asignatura;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "image")
+    @JoinColumn(name = "image", nullable = true)
     private Image image;
 
     @Column(name = "cantidad")

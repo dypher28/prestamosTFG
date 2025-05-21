@@ -18,6 +18,7 @@ public class AsignaturaController {
 
     @GetMapping("librosAsignaturas/{idAsignatura}")
     public ResponseEntity<ResponseModel> librosAsignaturas(@PathVariable int idAsignatura){
-        return ResponseEntity.ok(asignaturaService.obtenerLibrosPorAsignatura(idAsignatura));
+        ResponseModel responseModel = asignaturaService.obtenerLibrosPorAsignatura(idAsignatura);
+        return ResponseEntity.ok(responseModel);
     }
 }

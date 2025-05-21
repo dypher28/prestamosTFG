@@ -4,11 +4,13 @@ import org.dam23.prestamostfg.dtos.LibroDto;
 import org.dam23.prestamostfg.entities.Libro;
 import org.dam23.prestamostfg.mappers.LibroMapper;
 import org.dam23.prestamostfg.models.ResponseModel;
+import org.dam23.prestamostfg.repositories.ImageRepository;
 import org.dam23.prestamostfg.services.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.Optional;
 
 @RestController

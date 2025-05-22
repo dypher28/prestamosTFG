@@ -22,7 +22,10 @@ public class Paquete {
     @JoinColumn(name = "curso_id")
     private Curso curso;
 
-    @ManyToMany(mappedBy = "paquetes")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinTable(name = "paquetes_libros",
+            joinColumns = @JoinColumn(name = "id_paquete"),
+            inverseJoinColumns = @JoinColumn(name = "id_libro"))
     private Set<Libro> libros = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "paquete")

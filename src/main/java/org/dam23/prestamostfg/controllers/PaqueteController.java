@@ -7,10 +7,7 @@ import org.dam23.prestamostfg.services.PaqueteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/paquetes")
@@ -22,5 +19,10 @@ public class PaqueteController {
     @PostMapping("/crearPaquete")
     public ResponseEntity<ResponseModel> crearPaquete(@RequestBody PaqueteDto paqueteDto) {
         return ResponseEntity.ok(paqueteService.crearPaquete(paqueteDto));
+    }
+
+    @GetMapping("obtenerPaquetes")
+    public ResponseEntity<ResponseModel> obtenerPaquetes(){
+        return ResponseEntity.ok(paqueteService.obtenerPaquetes());
     }
 }

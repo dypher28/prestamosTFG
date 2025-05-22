@@ -35,10 +35,7 @@ public class Libro {
     @Column(name = "cantidad")
     private Integer cantidad;
 
-    @ManyToMany
-    @JoinTable(name = "paquetes_libros",
-            joinColumns = @JoinColumn(name = "id_libro"),
-            inverseJoinColumns = @JoinColumn(name = "id_paquete"))
+    @ManyToMany(mappedBy = "libros")
     private Set<Paquete> paquetes = new LinkedHashSet<>();
 
     public Integer getId() {

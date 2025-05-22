@@ -3,6 +3,8 @@ package org.dam23.prestamostfg.services;
 import org.dam23.prestamostfg.dtos.PaqueteDto;
 import org.dam23.prestamostfg.entities.Libro;
 import org.dam23.prestamostfg.entities.Paquete;
+import org.dam23.prestamostfg.infos.CursoInfo;
+import org.dam23.prestamostfg.infos.PaqueteInfo;
 import org.dam23.prestamostfg.mappers.PaqueteMapper;
 import org.dam23.prestamostfg.models.ResponseModel;
 import org.dam23.prestamostfg.repositories.LibroRepository;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -40,6 +43,8 @@ public class PaqueteService {
                 libros.add(libro);
             }
         }
+        paquete = paqueteRepository.save(paquete);
+
         paquete.setLibros(libros);
 
         paquete = paqueteRepository.save(paquete);
@@ -48,6 +53,14 @@ public class PaqueteService {
             return new ResponseModel(0, "Paquete creado correctamente", paquete.getId());
         }
         return new ResponseModel(1, "Error al crear el paquete", null);
+    }
+
+    public ResponseModel obtenerPaquetes() {
+        List<PaqueteInfo> listaPaquetes = paqueteRepository.findAllByOrderById();
+        if (!listaPaquetes.isEmpty()) {
+            return new ResponseModel(0, "Lista de paquetes", listaPaquetes);
+        }
+        return new ResponseModel(1, "No se encontraron paquetes", null);
     }
 
 }

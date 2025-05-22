@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface PaqueteRepository extends JpaRepository<Paquete, Integer> {
 
-    List<PaqueteInfo> findAllBy();
+    List<PaqueteInfo> findAllByOrderById();
 }

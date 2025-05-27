@@ -9,4 +9,8 @@ import java.util.List;
 public interface MatriculaRepository extends JpaRepository<Matricula, Integer> {
 
     List<MatriculaInfo> findAllByOrderById();
+
+    List<MatriculaInfo> findByAlumno_NombreContainsIgnoreCaseOrAlumno_ApellidosContainsIgnoreCase(String nombre, String apellidos);
+
+
 }

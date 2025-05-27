@@ -22,4 +22,8 @@ public class MatriculaService {
         }
         return new ResponseModel(1, "No se encontraron matriculas", null);
     }
+
+    public List<MatriculaInfo> buscarPorNombreOApellido(String filtro) {
+        return matriculaRepository.findByAlumno_NombreContainsIgnoreCaseOrAlumno_ApellidosContainsIgnoreCase(filtro, filtro);
+    }
 }

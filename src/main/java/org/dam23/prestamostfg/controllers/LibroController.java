@@ -39,4 +39,9 @@ public class LibroController {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping("/borrarLibro/{idLibro}")
+    public ResponseEntity<ResponseModel> borrarLibro(@PathVariable Integer idLibro) {
+        return ResponseEntity.ok(libroService.borrarLibro(idLibro));
+    }
+
 }

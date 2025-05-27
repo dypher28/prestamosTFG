@@ -25,4 +25,9 @@ public class PaqueteController {
     public ResponseEntity<ResponseModel> obtenerPaquetes(){
         return ResponseEntity.ok(paqueteService.obtenerPaquetes());
     }
+
+    @DeleteMapping("/borrarPaquete/{idPaquete}")
+    public ResponseEntity<ResponseModel> borrarPaquete(@PathVariable Integer idPaquete) {
+        return ResponseEntity.ok(paqueteService.borrarPaquete(idPaquete));
+    }
 }

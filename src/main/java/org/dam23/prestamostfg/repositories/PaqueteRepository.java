@@ -9,4 +9,7 @@ import java.util.List;
 public interface PaqueteRepository extends JpaRepository<Paquete, Integer> {
 
     List<PaqueteInfo> findAllByOrderById();
+
+    @Override
+    void deleteById(Integer integer);
 }

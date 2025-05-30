@@ -2,12 +2,16 @@ package org.dam23.prestamostfg.controllers;
 
 import org.dam23.prestamostfg.dtos.LibroDto;
 import org.dam23.prestamostfg.dtos.PaqueteDto;
+import org.dam23.prestamostfg.infos.MatriculaInfo;
+import org.dam23.prestamostfg.infos.PaqueteInfo;
 import org.dam23.prestamostfg.models.ResponseModel;
 import org.dam23.prestamostfg.services.PaqueteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/paquetes")
@@ -29,5 +33,10 @@ public class PaqueteController {
     @DeleteMapping("/borrarPaquete/{idPaquete}")
     public ResponseEntity<ResponseModel> borrarPaquete(@PathVariable Integer idPaquete) {
         return ResponseEntity.ok(paqueteService.borrarPaquete(idPaquete));
+    }
+
+    @GetMapping("/filtrarPorNombre")
+    public List<PaqueteInfo> filtrarPorNombre(@RequestParam String filtro) {
+        return paqueteService.buscarPorNombre(filtro);
     }
 }

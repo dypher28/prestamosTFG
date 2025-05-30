@@ -1,5 +1,6 @@
 package org.dam23.prestamostfg.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.dam23.prestamostfg.dtos.PrestamoDto;
 import org.dam23.prestamostfg.entities.Matricula;
 import org.dam23.prestamostfg.entities.Paquete;
@@ -13,6 +14,7 @@ import org.dam23.prestamostfg.repositories.PrestamoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,5 +71,31 @@ public class PrestamoService {
         }
         return new ResponseModel(1, "No se encontraron presstamos", null);
     }
+
+    public void eliminarPrestamoPorId(Integer id) {
+        if (prestamoRepository.existsById(id)) {
+            prestamoRepository.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Préstamo con ID " + id + " no encontrado");
+        }
+    }
+
+    public void devolverPrestamo(Integer idPrestamo) {
+        Prestamo prestamo = prestamoRepository.findById(idPrestamo)
+                .orElseThrow(() -> new EntityNotFoundException("Préstamo no encontrado"));
+
+        if (prestamo.getDevuelto() != null && prestamo.getDevuelto()) {
+            throw new IllegalStateException("El préstamo ya ha sido devuelto");
+        }
+
+        prestamo.setDevuelto(true);
+        prestamo.setFechaDevolucion(LocalDate.now());
+        prestamoRepository.save(prestamo);
+    }
+
+    public boolean paqueteTienePrestamo(Long paqueteId) {
+        return prestamoRepository.existsByPaqueteId(paqueteId);
+    }
+
 
 }

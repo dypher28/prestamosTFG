@@ -5,6 +5,7 @@ import org.dam23.prestamostfg.dtos.PaqueteDto;
 import org.dam23.prestamostfg.entities.Libro;
 import org.dam23.prestamostfg.entities.Paquete;
 import org.dam23.prestamostfg.infos.CursoInfo;
+import org.dam23.prestamostfg.infos.MatriculaInfo;
 import org.dam23.prestamostfg.infos.PaqueteInfo;
 import org.dam23.prestamostfg.mappers.PaqueteMapper;
 import org.dam23.prestamostfg.models.ResponseModel;
@@ -106,6 +107,10 @@ public class PaqueteService {
         // Eliminar el paquete
         paqueteRepository.delete(paquete);
         return new ResponseModel(0, "El paquete ha sido borrado", null);
+    }
+
+    public List<PaqueteInfo> buscarPorNombre(String filtro) {
+        return paqueteRepository.findByName(filtro);
     }
 
 

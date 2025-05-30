@@ -10,4 +10,10 @@ import java.util.List;
 public interface PrestamoRepository extends JpaRepository<Prestamo, Integer> {
 
     List<PrestamoInfo> findAllByOrderById();
+
+    @Override
+    void deleteById(Integer integer);
+
+    boolean existsByPaqueteId(Long paqueteId);
+
 }

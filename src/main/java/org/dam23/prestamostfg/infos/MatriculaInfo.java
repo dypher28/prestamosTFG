@@ -49,7 +49,7 @@ public interface MatriculaInfo {
 
         LocalDate getFechaDevolucion();
 
-        Boolean isDevuelto();
+        Boolean getDevuelto();
 
         PaqueteInfo1 getPaquete();
 

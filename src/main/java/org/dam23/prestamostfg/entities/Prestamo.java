@@ -22,7 +22,8 @@ public class Prestamo {
     @JoinColumn(name = "paquete_id")
     private Paquete paquete;
 
-    @Column(name = "fecha_prestamo")
+    @Column(name = "fecha_prestamo",nullable = false, insertable = false, updatable = false)
+    @ColumnDefault("CURRENT_DATE")
     private LocalDate fechaPrestamo;
 
     @Column(name = "fecha_devolucion")

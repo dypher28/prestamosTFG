@@ -30,6 +30,33 @@ public class PaqueteService {
     @Autowired
     private LibroRepository libroRepository;
 
+//    public ResponseModel crearPaquete(PaqueteDto paqueteDto) {
+//        Paquete paquete = paqueteMapper.toEntity(paqueteDto);
+//
+//        Set<Libro> libros = new HashSet<>();
+//        for (Libro libroDto : paquete.getLibros()) {
+//            Libro libro;
+//            if (libroDto.getId() != null) {
+//                libro = libroRepository.findById(libroDto.getId()).orElse(null); // busca libro existente
+//            } else {
+//                libro = libroDto; // si no tiene id, es un nuevo libro
+//            }
+//            if (libro != null) {
+//                libros.add(libro);
+//            }
+//        }
+//        paquete = paqueteRepository.save(paquete);
+//
+//        paquete.setLibros(libros);
+//
+//        paquete = paqueteRepository.save(paquete);
+//
+//        if (paquete.getId() != null) {
+//            return new ResponseModel(0, "Paquete creado correctamente", paquete.getId());
+//        }
+//        return new ResponseModel(1, "Error al crear el paquete", null);
+//    }
+
     public ResponseModel crearPaquete(PaqueteDto paqueteDto) {
         Paquete paquete = paqueteMapper.toEntity(paqueteDto);
 
@@ -37,18 +64,19 @@ public class PaqueteService {
         for (Libro libroDto : paquete.getLibros()) {
             Libro libro;
             if (libroDto.getId() != null) {
-                libro = libroRepository.findById(libroDto.getId()).orElse(null); // busca libro existente
+                libro = libroRepository.findById(libroDto.getId()).orElse(null);
             } else {
-                libro = libroDto; // si no tiene id, es un nuevo libro
+                libro = libroDto;
             }
             if (libro != null) {
                 libros.add(libro);
             }
         }
-        paquete = paqueteRepository.save(paquete);
 
+        // Asignar la colección correcta ANTES de guardar
         paquete.setLibros(libros);
-
+        paquete.setId(null);
+        // Guardar solo UNA vez
         paquete = paqueteRepository.save(paquete);
 
         if (paquete.getId() != null) {
@@ -56,6 +84,7 @@ public class PaqueteService {
         }
         return new ResponseModel(1, "Error al crear el paquete", null);
     }
+
 
     public ResponseModel obtenerPaquetes() {
         List<PaqueteInfo> listaPaquetes = paqueteRepository.findAllByOrderById();

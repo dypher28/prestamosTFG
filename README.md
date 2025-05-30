@@ -41,7 +41,7 @@ Este proyecto es parte de un Trabajo de Fin de Grado y tiene como objetivo crear
 
 ### Requisitos previos
 
-- [Java 21]([https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
+- [Java 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 - [PostgreSQL](https://www.postgresql.org/)
 - [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 - [.NET SDK 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) (para la parte MAUI)
